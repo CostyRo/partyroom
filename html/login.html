@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autentificare</title>
+    <link rel="stylesheet" type="text/css" href="../style/login.css">
+</head>
+<body>
+
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Parola:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Autentificare</button>
+        
+        <p>Fara cont?</p>
+        <a href="#" onclick="toggleForm()">Inscriere</a>
+    </form>
+
+    <form id="signupForm" style="display: none;">
+        <label for="newUsername">Username:</label>
+        <input type="text" id="newUsername" name="newUsername" required>
+
+        <label for="newPassword">Parola:</label>
+        <input type="password" id="newPassword" name="newPassword" required>
+
+        <button type="submit">Inscriere</button>
+
+        <p>Ai deja cont?</p>
+        <a href="#" onclick="toggleForm()">Autentificare</a>
+    </form>
+
+    <script src="../js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room</title>
+    <link rel="stylesheet" type="text/css" href="../style/room.css">
+</head>
+<body>
+
+    <div>
+
+        <h1>Room</h1>
+
+        <div id="dj" style="display: none;">
+            <h2>PlayList</h2>
+
+            <button onclick="gotoStatistics()">Statistici</button>
+            <button onclick="close_openRoom()">Inchide Room-ul</button>
+            <button onclick="resetRoom()">Reseteaza Room-ul</button>
+            <button onclick="openDeleteRoomModal()">Sterge Room-ul</button>
+            <button onclick="back()">Inpaoi</button>
+
+            <h5>Codul Room-ului este:</h5>
+        </div>
+
+        <div id="user" style="display: none;">
+            <textarea id="songInput" placeholder="Introduceți melodia: "></textarea>
+
+            <label for="song">Introdu melodie: </label>
+            <select id="songSelect">
+                <option value="name">Nume melodie + artist</option>
+                <option value="url">Link</option>
+            </select>
+
+            <br>
+            <br>
+
+            <label for="type">Gen melodie: </label>
+            <select id="typeSelect">
+                <option value=""></option>
+                <option value="pop">Comercial</option>
+                <option value="rock">Veche</option>
+                <option value="hip-hop">Rap</option>
+                <option value="hip-hop">Trap</option>
+                <option value="electronic">Electronica</option>
+                <option value="hip-hop">Manele</option>
+            </select>
+            <button onclick="sendSong()">Trimite Melodie</button>
+        </div>
+
+    </div>
+
+    <div id="deleteRoomModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDeleteRoomModal()">&times;</span>
+            <h2>ESTI SIGUR CA VREI SA STERGI ACEST ROOM?</h2>
+            <button onclick="deleteRoom()" style="background-color: red;">Sterge</button>
+        </div>
+    </div>
+
+    <script src="../js/room.js"></script>
+
+</body>
+</html>

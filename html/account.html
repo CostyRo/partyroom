@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cont</title>
+    <link rel="stylesheet" type="text/css" href="../style/account.css">
+</head>
+<body>
+
+    <div>
+        <h1>Optiuni Cont: </h1>
+        
+        <button onclick="openSelectProfileModal()">Profile</button>
+        <button onclick="openCreateProfileModal()">Creeaza profil</button>
+        <button onclick="logout()">Delogare</button>
+    </div>
+
+    <div id="selectProfileModal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeSelectProfileModal()">&times;</span>
+          <h2>Selecteaza profil</h2>
+      </div>
+    </div>
+
+    <div id="createProfileModal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeCreateProfileModal()">&times;</span>
+          <h2>Creeaza un profil</h2>
+          <form>
+              <label for="profileName">Numele profilului: </label>
+              <input type="text" id="profileName" name="profileName" required>
+
+              <br>
+              <br>
+
+              <label for="profileType">Alege tipul de profil:</label>
+              <select id="profileType" name="profileType">
+                  <option value="DJ">DJ</option>
+                  <option value="Ascultator">Ascultator</option>
+              </select>
+              <br>
+              <button type="submit">Creeaza profil</button>
+          </form>
+      </div>
+    </div>
+
+    <script src="../js/account.js"></script>
+</body>
+</html>
