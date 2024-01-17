@@ -15,6 +15,13 @@ if (isset($_GET['profile'])) {
     if ($result->num_rows == 0) {
         require "html/error.html";
     } else {
+        $sql = $conn->query(
+            "SELECT *
+            FROM rooms
+            JOIN roomconector ON rooms.roomname = roomconector.roomname
+            WHERE roomconector.profilename = '$profile'"
+        );
+        $_SESSION['profile_rooms'] = array_column($sql->fetch_all(MYSQLI_ASSOC),"roomname");
         $row = $result->fetch_assoc();
         if ($row["type"] == "DJ") {
         require "html/profile_dj.html";

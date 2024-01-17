@@ -24,7 +24,7 @@
 
             <div class="grid">
                 <?php
-                foreach (array("Room1","Room2") as $room) {
+                foreach ($_SESSION['profile_rooms'] as $room) {
                     echo '<div class="room">';
                     echo '    <h3>' . $room . '</h3>';
                     echo '    <button onclick="">Selecteaza</button>';
