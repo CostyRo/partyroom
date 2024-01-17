@@ -3,6 +3,7 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["roomName"];
     $code = $_POST["roomCode"];
+    $profile = $_SESSION['auth_profile'];
 
     $conn = new mysqli("localhost", "root", "", "daw-app");
 
@@ -11,14 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($conn->query(
-        "SELECT * FROM rooms WHERE roomname = '$name'"
-        )->num_rows > 0) {
+        "SELECT * FROM rooms WHERE roomname = '$name' AND code = '$code'"
+        )->num_rows == 0) {
         require "html/error.html";
     } else {
-        $code = generateRandomString();
         $sql = 
             "INSERT INTO roomconector (profilename, roomname) 
-            VALUES ('$name', '$code')";
+            VALUES ('$profile', '$name')";
 
         if ($conn->query($sql)) {
             $_SESSION['auth_room'] = $name;
