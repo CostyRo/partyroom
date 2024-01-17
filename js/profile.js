@@ -31,21 +31,7 @@ function closeDeleteProfileModal() {
 }
 
 function deleteProfile() {
-    //  window.location.href = "account.php"
-    fetch('profile.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'profilename': document.title
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data)
-    })
-    .catch((error) => {
-        console.error('Error:', error)
-    });
+    window.location.href = "account.php"
 }
 
 function back() {

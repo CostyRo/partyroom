@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room</title>
+    <title>Room <?php echo $_SESSION['auth_room'];?></title>
     <link rel="stylesheet" type="text/css" href="../style/room.css">
 </head>
 <body>
 
     <div>
 
-        <h1>Room</h1>
+        <h1>Room <?php echo $_SESSION['auth_room'];?></h1>
 
         <div id="dj" style="display: none;">
             <h2>PlayList</h2>
@@ -21,7 +21,8 @@
             <button onclick="openDeleteRoomModal()">Sterge Room-ul</button>
             <button onclick="back()">Inpaoi</button>
 
-            <h5>Codul Room-ului este:</h5>
+            <h5>Codul Room-ului este: <?php echo $_SESSION['auth_room_code'];?></h5>
+            
         </div>
 
         <div id="user" style="display: none;">
