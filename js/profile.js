@@ -1,13 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var isDJ = false
-
-  if (isDJ) {
-      document.getElementById('createRoom').style.display = 'block'
-  } else {
-      document.getElementById('enterRoom').style.display = 'block'
-  }
-})
-
 function openSelectRoomModal() {
     document.getElementById('selectRoomModal').style.display = 'block'
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil <?php echo $profile;?></title>
+    <link rel="stylesheet" type="text/css" href="../style/profile.css">
+</head>
+<body>
+
+    <div>
+        <h1>Optiuni Profil <?php echo $profile;?>: </h1>
+
+        <button id="selectRoom" onclick="openSelectRoomModal()">Selecteaza un Room</button>
+        <button id="enterRoom" onclick="openEnterRoomModal()">Intra in Room</button>
+        <button id="delete" onclick="openDeleteProfileModal()">Sterge Profilul</button>
+        <button onclick="back()">Inpaoi</button>
+    </div>
+
+    <div id="selectRoomModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSelectRoomModal()">&times;</span>
+            <h2>Selecteaza Room</h2>
+
+            <div class="grid">
+                <?php
+                foreach (array("Room1","Room2") as $room) {
+                    echo '<div class="room">';
+                    echo '    <h3>' . $room . '</h3>';
+                    echo '    <button onclick="">Selecteaza</button>';
+                    echo '</div>';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <div id="enterRoomModal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeEnterRoomModal()">&times;</span>
+          <h2>Intra in Room</h2>
+          <form>
+              <label for="roomName">Numele Room-ului: </label>
+              <input type="text" id="roomName" name="roomName" required>
+              <br>
+              <label for="roomCode">Codul Room-ului: </label>
+              <input type="text" id="roomCode" name="roomCode" required>
+
+              <br>
+              <button type="submit">Intra in  Room</button>
+          </form>
+      </div>
+  </div>
+
+    <div id="deleteProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDeleteProfileModal()">&times;</span>
+            <h2>ESTI SIGUR CA VREI SA STERGI ACEST PROFIL?</h2>
+            <button onclick="deleteProfile()" style="background-color: red;">Sterge</button>
+        </div>
+    </div>
+
+    <script src="../js/profile.js"></script>
+
+</body>
+</html>

@@ -8,12 +8,21 @@ if (isset($_GET['profile'])) {
         die("Eroare: " . $conn->connect_error);
     }
 
-    if ($conn->query(
+    $result = $conn->query(
         "SELECT * FROM profiles WHERE profilename = '$profile'"
-        )->num_rows == 0) {
+    );
+
+    if ($result->num_rows == 0) {
         require "html/error.html";
     } else {
-        require "html/profile.html";
+        $row = $result->fetch_assoc();
+        if ($row["type"] == "DJ") {
+        require "html/profile_dj.html";
+        } else if ($row["type"] == "Listener") {
+            require "html/profile_listener.html";
+        } else {
+
+        }
     }
 
     $conn->close();
