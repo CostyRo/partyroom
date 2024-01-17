@@ -15,5 +15,5 @@ function closeCreateProfileModal() {
 }
 
 function logout() {
-    window.location.href = "../html/login.html"
+    window.location.href = "/";
 }

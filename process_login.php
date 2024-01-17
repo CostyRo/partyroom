@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -20,11 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: account.php");
             exit();
         } else {
-            echo $row["password"];
+            echo "Parola gresita!";
         }
 
     } else {
-        echo "";
+        echo "$username nu exista!";
     }
     
     $conn->close();

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cont</title>
+    <title>Cont <?php echo $user;?></title>
     <link rel="stylesheet" type="text/css" href="../style/account.css">
 </head>
 <body>
@@ -27,7 +27,7 @@
       <div class="modal-content">
           <span class="close" onclick="closeCreateProfileModal()">&times;</span>
           <h2>Creeaza un profil</h2>
-          <form>
+          <form action="../create_profile.php" method="post">
               <label for="profileName">Numele profilului: </label>
               <input type="text" id="profileName" name="profileName" required>
 
@@ -37,7 +37,7 @@
               <label for="profileType">Alege tipul de profil:</label>
               <select id="profileType" name="profileType">
                   <option value="DJ">DJ</option>
-                  <option value="Ascultator">Ascultator</option>
+                  <option value="Listener">Ascultator</option>
               </select>
               <br>
               <button type="submit">Creeaza profil</button>
