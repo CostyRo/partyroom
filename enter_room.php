@@ -1,13 +1,8 @@
 <?php
-function generateRandomString($length = 8) {
-  $bytes = random_bytes($length / 2);
-  return bin2hex($bytes);
-}
-
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["roomName"];
-    $profile = $_SESSION['auth_profile'];
+    $code = $_POST["roomCode"];
 
     $conn = new mysqli("localhost", "root", "", "daw-app");
 
@@ -22,13 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $code = generateRandomString();
         $sql = 
-            "INSERT INTO rooms (roomname, code) 
+            "INSERT INTO roomconector (profilename, roomname) 
             VALUES ('$name', '$code')";
-        $sql2 = 
-            "INSERT INTO roomconector (profilename, roomname)
-            VALUES ('$profile', '$name')";
-
-        $conn->query($sql2);
 
         if ($conn->query($sql)) {
             $_SESSION['auth_room'] = $name;
