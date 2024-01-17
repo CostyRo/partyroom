@@ -41,9 +41,9 @@ function closeDeleteProfileModal() {
 }
 
 function deleteProfile() {
-    window.location.href = "../html/account.html"
+    window.location.href = "account.php"
 }
 
 function back() {
-  window.location.href = "../html/account.html"
+  window.location.href = "account.php"
 }

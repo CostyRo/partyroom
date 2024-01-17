@@ -16,13 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         )->num_rows > 0) {
         echo "$name exista deja în baza de date!";
     } else {
-        $sql = $conn->query(
+        $sql = 
             "INSERT INTO profiles (profilename, username, type) 
-            VALUES ('$name', '$user', '$type')"
-        );
+            VALUES ('$name', '$user', '$type')";
 
         if ($conn->query($sql)) {
-
+            $_SESSION['auth_profile'] = $name;
+            header("Location: profile.php");
+            exit();
         }
     }
 

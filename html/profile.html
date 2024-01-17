@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil</title>
+    <title>Profil <?php echo $profile;?></title>
     <link rel="stylesheet" type="text/css" href="../style/profile.css">
 </head>
 <body>
 
     <div>
-        <h1>Optiuni Profil: </h1>
+        <h1>Optiuni Profil <?php echo $profile;?>: </h1>
 
         <button id="selectRoom" onclick="openSelectRoomModal()">Selecteaza un Room</button>
         <button id="createRoom" onclick="openCreateRoomModal()" style="display: none;">Creeaza un Room nou</button>
@@ -22,6 +22,18 @@
         <div class="modal-content">
             <span class="close" onclick="closeSelectRoomModal()">&times;</span>
             <h2>Selecteaza Room</h2>
+
+            <div class="grid">
+                <div class="grid-item">
+                  <h3>Room 1</h3>
+                  <button onclick="selectRoom('Room 1')">Selecteaza</button>
+                </div>
+                
+                <div class="grid-item">
+                  <h3>Room 2</h3>
+                  <button onclick="selectRoom('Room 2')">Selecteaza</button>
+                </div>
+              </div>
         </div>
     </div>
 
