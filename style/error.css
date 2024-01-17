@@ -19,3 +19,17 @@ body {
 h1 {
   color: #e74c3c;
 }
+
+button {
+  background-color: #2e34a5;
+  color: #fff;
+  padding: 20px 40px;
+  font-size: 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #060925;
+}

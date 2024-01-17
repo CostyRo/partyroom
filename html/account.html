@@ -26,7 +26,7 @@
               foreach ($_SESSION['user_profiles'] as $profile) {
                   echo '<div class="profile">';
                   echo '    <h3>' . $profile . '</h3>';
-                  echo '    <button onclick="gotoProfile($profile)">Selecteaza</button>';
+                  echo '    <button ><a href="profile.php?profile=' . $profile . '">Selecteaza</a></button>';
                  echo '</div>';
               }
               ?>

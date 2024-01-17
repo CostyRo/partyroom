@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($conn->query(
         "SELECT * FROM profiles WHERE profilename = '$name'"
         )->num_rows > 0) {
-        echo "$name exista deja în baza de date!";
+        require "html/error.html";
     } else {
         $sql = 
             "INSERT INTO profiles (profilename, username, type) 
