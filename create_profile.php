@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($conn->query($sql)) {
             $_SESSION['auth_profile'] = $name;
-            header("Location: profile.php");
+            header("Location: profile.php?profile=" . $name);
             exit();
         }
     }
