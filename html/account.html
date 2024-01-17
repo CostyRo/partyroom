@@ -22,15 +22,14 @@
           <h2>Selecteaza profil</h2>
 
           <div class="grid">
-            <div class="grid-item">
-              <h3>Profil 1</h3>
-              <button onclick="selectProfile('Profil 1')">Selecteaza</button>
-            </div>
-            
-            <div class="grid-item">
-              <h3>Profil 2</h3>
-              <button onclick="selectProfile('Profil 2')">Selecteaza</button>
-            </div>
+            <?php
+            foreach ($_SESSION['user_profiles'] as $profile) {
+                echo '<div class="profile">';
+                echo '    <h3>' . $profile . '</h3>';
+                echo '    <button onclick="gotoProfile($profile)">Selectează</button>';
+                echo '</div>';
+            }
+            ?>
           </div>
       </div>
     </div>
