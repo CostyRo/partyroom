@@ -7,13 +7,14 @@
     <link rel="stylesheet" type="text/css" href="../style/account.css">
 </head>
 <body>
-
     <div>
         <h1>Optiuni Cont <?php echo $user;?>: </h1>
         
         <button onclick="openSelectProfileModal()">Profile</button>
         <button onclick="openCreateProfileModal()">Creeaza profil</button>
-        <button onclick="logout()">Delogare</button>
+        <form action="logout.php" method="post">
+            <button>Delogare</button>
+        </form>
     </div>
 
     <div id="selectProfileModal" class="modal">
@@ -23,10 +24,10 @@
 
           <div class="grid">
               <?php
-              foreach ($_SESSION['user_profiles'] as $profile) {
+              foreach ($profiles as $profile) {
                   echo '<div class="profile">';
                   echo '    <h3>' . $profile . '</h3>';
-                  echo '    <button ><a href="profile.php?profile=' . $profile . '">Selecteaza</a></button>';
+                  echo '    <form action="profile.php?profile=' . $profile . '" method="post"><button>Selecteaza</button></form>';
                  echo '</div>';
               }
               ?>

@@ -13,36 +13,38 @@ if(!isset($_COOKIE['login'])){
     exit();
 }
 
-if (isset($_GET['profile'])) {
+if (isset($_GET['room']) && isset($_GET['profile'])) {
     $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
     if ($conn->connect_error) {
         die("Eroare: " . $conn->connect_error);
     }
 
+    $room = validateInput($conn,$_GET['room']);
     $profile = validateInput($conn,$_GET['profile']);
-    $user = $conn->real_escape_string(getUser($conn));
 
     $result = $conn->query(
-        "SELECT * FROM profiles WHERE profilename = '$profile' AND username = '$user' LIMIT 1"
+        "SELECT *
+        FROM rooms
+        JOIN roomconector ON rooms.roomname = roomconector.roomname
+        JOIN profiles ON profiles.profilename = roomconector.profilename
+        WHERE rooms.roomname = '$room' AND profiles.profilename = '$profile'
+        LIMIT 1"
     );
 
     if ($result->num_rows == 0) {
         require "html/error.html";
     } else {
-        $rooms = $conn->query(
-            "SELECT DISTINCT rooms.roomname
-            FROM rooms
-            JOIN roomconector ON rooms.roomname = roomconector.roomname
-            WHERE roomconector.profilename = '$profile'"
-        );
-
-        $rooms = array_column($rooms->fetch_all(MYSQLI_ASSOC),"roomname");
         $row = $result->fetch_assoc();
-        if ($row["type"] == "DJ") {
-            require "html/profile_dj.html";
-        } else if ($row["type"] == "Listener") {
-            require "html/profile_listener.html";
-        } else {
+        $code = $row['code'];
+        $status = $row["status"];
+        if($row['type'] == "DJ"){
+            require "html/room_dj.html";
+        }else{
+            if($status == "Closed"){
+                require "html/closed.html";
+            }else{
+                require "html/room_listener.html";
+            }
         }
     }
     $conn->close();

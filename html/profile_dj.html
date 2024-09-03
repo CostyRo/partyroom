@@ -7,14 +7,13 @@
     <link rel="stylesheet" type="text/css" href="../style/profile.css">
 </head>
 <body>
-
     <div>
         <h1>Optiuni Profil <?php echo $profile;?>: </h1>
 
         <button id="selectRoom" onclick="openSelectRoomModal()">Selecteaza un Room</button>
         <button id="createRoom" onclick="openCreateRoomModal()">Creeaza un Room nou</button>
         <button id="delete" onclick="openDeleteProfileModal()">Sterge Profilul</button>
-        <button onclick="back()">Inpaoi</button>
+        <button onclick="window.location.href = 'account.php'">Inapoi</button>
     </div>
 
     <div id="selectRoomModal" class="modal">
@@ -24,10 +23,10 @@
 
             <div class="grid">
                 <?php
-                foreach ($_SESSION['profile_rooms'] as $room) {
+                foreach ($rooms as $room) {
                     echo '<div class="room">';
                     echo '    <h3>' . $room . '</h3>';
-                    echo '    <button onclick="">Selecteaza</button>';
+                    echo '    <form action="room.php?room=' . $room . '&profile=' . $profile . '" method="post"><button>Selecteaza</button></form>';
                     echo '</div>';
                 }
                 ?>
@@ -39,7 +38,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeCreateRoomModal()">&times;</span>
             <h2>Creeaza Room</h2>
-            <form action="../create_room.php" method="post">
+            <form action="create_room.php?profile=<?php echo urlencode($profile); ?>" method="post">
                 <label for="roomName">Numele Room-ului: </label>
                 <input type="text" id="roomName" name="roomName" required>
 
@@ -53,7 +52,9 @@
         <div class="modal-content">
             <span class="close" onclick="closeDeleteProfileModal()">&times;</span>
             <h2>ESTI SIGUR CA VREI SA STERGI ACEST PROFIL?</h2>
-            <button onclick="deleteProfile()" style="background-color: red;">Sterge</button>
+            <form action="delete_profile.php?profile=<?php echo urlencode($_GET['profile']); ?>" method="post">
+                <button style="background-color: red;">Sterge</button>
+            </form>
         </div>
     </div>
 

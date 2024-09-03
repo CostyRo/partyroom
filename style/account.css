@@ -13,6 +13,10 @@ h1,h2 {
   text-align: center;
 }
 
+h3 {
+  height: 30%;
+}
+
 button {
   background-color: #2e34a5;
   color: #fff;
@@ -50,9 +54,10 @@ button:hover {
   background-color: #fff;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(235, 196, 196, 0.2);
   width: 50%;
   max-width: 500px;
+  min-height: 40%;
   overflow-y: auto;
 }
 
@@ -93,6 +98,6 @@ button:hover {
   cursor: pointer;
 }
 
-a {
-  color: #fff;
+form {
+  width: 100%;
 }

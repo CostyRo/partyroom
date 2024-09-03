@@ -1,43 +1,40 @@
 <?php
-function generateRandomString($length = 8) {
-  $bytes = random_bytes($length / 2);
-  return bin2hex($bytes);
-}
+require_once "utils.php";
 
 session_start();
+$config = include('config.php');
+if($config['debug']){
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+}
+
+if(!isset($_COOKIE['login'])){
+    header("Location: /");
+    exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST["roomName"];
-    $profile = $_SESSION['auth_profile'];
-
-    $conn = new mysqli("localhost", "root", "", "daw-app");
-
+    $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
     if ($conn->connect_error) {
         die("Eroare: " . $conn->connect_error);
     }
 
+    $room = validateInput($conn,$_POST["roomName"]);
+    $profile = validateInput($conn,$_GET['profile']);
+
     if ($conn->query(
-        "SELECT * FROM rooms WHERE roomname = '$name'"
+        "SELECT * FROM rooms WHERE roomname = '$room'"
         )->num_rows > 0) {
-        require "html/error.html";
+        $taken = "Roomul " . $room;
+        require "html/taken.html";
     } else {
-        $code = generateRandomString();
-        $sql = 
-            "INSERT INTO rooms (roomname, code) 
-            VALUES ('$name', '$code')";
-        $sql2 = 
-            "INSERT INTO roomconector (profilename, roomname)
-            VALUES ('$profile', '$name')";
+        $code = generateUniqueCode($conn);
 
-        $conn->query($sql2);
+        $conn->query("INSERT INTO roomconector (profilename, roomname) VALUES ('$profile', '$room')");
+        $conn->query("INSERT INTO rooms (roomname, code) VALUES ('$room', '$code')");
 
-        if ($conn->query($sql)) {
-            $_SESSION['auth_room'] = $name;
-            $_SESSION['auth_room_code'] = $code;
-            header("Location: html/room.html");
-            exit();
-        }
+        header("Location: room.php?room=" . $room . "&profile=" . $profile);
     }
-
     $conn->close();
 }
 ?>

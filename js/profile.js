@@ -29,11 +29,3 @@ function openDeleteProfileModal() {
 function closeDeleteProfileModal() {
     document.getElementById('deleteProfileModal').style.display = 'none'
 }
-
-function deleteProfile() {
-    window.location.href = "account.php"
-}
-
-function back() {
-  window.location.href = "account.php"
-}

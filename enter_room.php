@@ -1,33 +1,54 @@
 <?php
+require_once "utils.php";
+
 session_start();
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST["roomName"];
-    $code = $_POST["roomCode"];
-    $profile = $_SESSION['auth_profile'];
+$config = include('config.php');
+if($config['debug']){
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+}
 
-    $conn = new mysqli("localhost", "root", "", "daw-app");
+if(!isset($_COOKIE['login'])){
+    header("Location: /");
+    exit();
+}
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['profile'])) {
+    $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
     if ($conn->connect_error) {
         die("Eroare: " . $conn->connect_error);
     }
 
-    if ($conn->query(
-        "SELECT * FROM rooms WHERE roomname = '$name' AND code = '$code'"
-        )->num_rows == 0) {
-        require "html/error.html";
-    } else {
-        $sql = 
-            "INSERT INTO roomconector (profilename, roomname) 
-            VALUES ('$profile', '$name')";
+    $code = validateInput($conn,$_POST['roomCode'],8);
+    $profile = validateInput($conn,$_GET['profile']);
 
-        if ($conn->query($sql)) {
-            $_SESSION['auth_room'] = $name;
-            $_SESSION['auth_room_code'] = $code;
-            header("Location: html/room.html");
+    $result = $conn->query(
+        "SELECT * FROM rooms
+        JOIN roomconector ON rooms.roomname = roomconector.roomname
+        JOIN profiles ON profiles.profilename = roomconector.profilename
+        WHERE rooms.code = '$code'"
+    );
+
+    if ($result->num_rows == 0) {
+        $missing = "Codul " . $code;
+        require "html/missing.html";
+    } else if($result->num_rows > 1){
+        $taken = "Accesul ";
+        require "html/taken.html";
+    }else {
+        $row = $result->fetch_assoc();
+        $room = $conn->real_escape_string($row['roomname']);
+        if($row['status'] == "Closed"){
+            require "html/closed.html";
             exit();
         }
-    }
 
+        $conn->query("INSERT INTO roomconector (profilename, roomname) VALUES ('$profile', '$room')");
+
+        header("Location: room.php?room=" . $room . "&profile=" . $profile);
+    }
     $conn->close();
+} else {
+    require "html/error.html";
 }
 ?>

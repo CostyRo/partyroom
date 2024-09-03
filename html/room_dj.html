@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room <?php echo $room;?></title>
+    <link rel="stylesheet" type="text/css" href="../style/room.css">
+</head>
+<body>
+    <div>
+        <h1>Room <?php echo $room;?></h1>
+
+        <div id="dj">
+            <h2>PlayList</h2>
+
+            <button onclick="gotoStatistics()">Statistici</button>
+            <button onclick="window.location.href = `switch_room.php?room=<?php echo urlencode($_GET['room']); ?>&profile=<?php echo urlencode($_GET['profile']); ?>`">
+                <?php echo $status === 'Open' ? 'Inchide' : 'Deschide';?> Roomul
+            </button>
+            <button onclick="resetRoom()">Reseteaza Roomul</button>
+            <button onclick="openDeleteRoomModal()">Sterge Roomul</button>
+            <button onclick="window.location.href = `profile.php?profile=<?php echo urlencode($_GET['profile']); ?>`">Înapoi</button>
+
+            <h5>Codul Room-ului este: <?php echo $code;?></h5>
+        </div>
+
+        <div id="deleteRoomModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeDeleteRoomModal()">&times;</span>
+                <h2>ESTI SIGUR CA VREI SA STERGI ACEST ROOM?</h2>
+                <form action="delete_room.php?room=<?php echo urlencode($_GET['room']); ?>&profile=<?php echo urlencode($_GET['profile']); ?>" method="post">
+                    <button style="background-color: red;">Sterge</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/room.js"></script>
+</body>
+</html>
