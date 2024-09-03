@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $sql = "INSERT INTO profiles (profilename, username, type) VALUES ('$profile', '$user', '$type')";
         if ($conn->query($sql)) {
-            header("Location: profile.php?profile=" . $profile);
+            header("Location: profile.php?profile=" . $_POST["profileName"]);
         }
     }
     $conn->close();

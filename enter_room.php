@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['profile'])) {
 
         $conn->query("INSERT INTO roomconector (profilename, roomname) VALUES ('$profile', '$room')");
 
-        header("Location: room.php?room=" . $room . "&profile=" . $profile);
+        header("Location: room.php?room=" . $_POST['roomCode'] . "&profile=" . $_GET["profile"]);
     }
     $conn->close();
 } else {

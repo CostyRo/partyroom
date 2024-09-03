@@ -8,6 +8,11 @@ if($config['debug']){
     ini_set('display_errors', 1);
 }
 
+if(!isset($_COOKIE['login'])){
+    header("Location: /");
+    exit();
+}
+
 if (isset($_GET['profile'])) {
     $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
     if ($conn->connect_error) {

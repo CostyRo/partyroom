@@ -8,6 +8,11 @@ if($config['debug']){
     ini_set('display_errors', 1);
 }
 
+if(!isset($_COOKIE['login'])){
+    header("Location: /");
+    exit();
+}
+
 if (isset($_GET['room']) && isset($_GET['profile'])) {
     $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
     if ($conn->connect_error) {
@@ -29,7 +34,7 @@ if (isset($_GET['room']) && isset($_GET['profile'])) {
         $conn->query("DELETE FROM roomconector WHERE roomname = '$room'");
         $conn->query("DELETE FROM rooms WHERE roomname = '$room'");
 
-        header("Location: profile.php?profile=" . $profile);
+        header("Location: profile.php?profile=" . $_GET["profile"]);
     }
     $conn->close();
 }
