@@ -19,13 +19,17 @@ function generateUniqueCode($conn) {
 function validateInput($conn,$string,$limit=30) {
     return substr(
         htmlspecialchars(
-            preg_replace('/[^\x20-\x7E<>]/', '', $conn->real_escape_string($string)),
+            preg_replace('/([^\x20-\x7E]|&)/', '', $conn->real_escape_string($string)),
             ENT_QUOTES,
             'UTF-8'
         ),
         0,
         $limit
     );
+}
+
+function noAND($string) {
+    return preg_replace('/&/', '', $string);
 }
 
 function getUser($conn) {
