@@ -38,6 +38,12 @@ if (isset($_GET['room']) && isset($_GET['profile'])) {
         $code = $row['code'];
         $status = $row["status"];
         if($row['type'] == "DJ"){
+            $songs = $conn->query(
+                "SELECT *
+                FROM songs
+                WHERE songs.roomname = '$room'
+                ORDER BY time DESC"
+            )->fetch_all(MYSQLI_ASSOC);
             require "html/room_dj.html";
         }else{
             if($status == "Closed"){
@@ -47,6 +53,7 @@ if (isset($_GET['room']) && isset($_GET['profile'])) {
             }
         }
     }
+
     $conn->close();
 } else {
     require "html/error.html";

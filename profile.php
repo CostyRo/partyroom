@@ -45,6 +45,7 @@ if (isset($_GET['profile'])) {
         } else {
         }
     }
+
     $conn->close();
 } else {
     require "html/error.html";

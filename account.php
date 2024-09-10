@@ -30,5 +30,7 @@ if (isset($_COOKIE['login'])) {
         }
     }
 }
+
+$conn->close();
 header("Location: /");
 ?>

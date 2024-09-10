@@ -37,6 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         require "html/error.html";
     }
+
     $conn->close();
+} else {
+    require "html/error.html";
 }
 ?>

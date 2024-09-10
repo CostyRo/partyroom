@@ -34,8 +34,12 @@ if (isset($_GET['room']) && isset($_GET['profile'])) {
         $result = $conn->query("SELECT status FROM rooms WHERE rooms.roomname = '$room'");
         $status = $result->fetch_assoc()["status"] == "Open" ? "Closed" : "Open";
         $conn->query("UPDATE rooms SET rooms.status = '$status' WHERE rooms.roomname = '$room'");
-        header("Location: room.php?room=" . noAND($_GET['roomCode']) . "&profile=" . noAND($_GET["profile"]));
+
+        header("Location: room.php?room=" . noAND($_GET['room']) . "&profile=" . noAND($_GET["profile"]));
     }
+
     $conn->close();
+} else {
+    require "html/error.html";
 }
 ?>

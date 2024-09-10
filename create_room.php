@@ -13,7 +13,7 @@ if(!isset($_COOKIE['login'])){
     exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET["profile"])) {
     $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
     if ($conn->connect_error) {
         die("Eroare: " . $conn->connect_error);
@@ -35,6 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         header("Location: room.php?room=" . noAND($_POST['roomName']) . "&profile=" . noAND($_GET['profile']));
     }
+
     $conn->close();
+} else {
+    require "html/error.html";
 }
 ?>

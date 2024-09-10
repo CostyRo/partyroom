@@ -8,13 +8,13 @@
 </head>
 <body>
     <div>
-        <form method="post">
-            <textarea id="songInput" placeholder="Introduceti melodia: "></textarea>
+        <form action="send_song.php?room=<?php echo urlencode($room); ?>&profile=<?php echo urlencode($profile); ?>" method="post">
+            <textarea id="songInput" minlength="2" maxlength="500" placeholder="Introduceti melodia: " name="song"></textarea>
 
             <br>
 
-            <label for="song">Introdu melodie: </label>
-            <select id="songSelect">
+            <label for="song">Mod adaugare melodie: </label>
+            <select id="songSelect" name="method">
                 <option value="name">Nume melodie + artist</option>
                 <option value="url">Link</option>
             </select>
@@ -22,16 +22,16 @@
             <br>
 
             <label for="type">Gen melodie: </label>
-            <select id="typeSelect">
+            <select id="typeSelect" name="type">
                 <option value=""></option>
-                <option value="pop">Comercial</option>
-                <option value="rock">Rock</option>
-                <option value="old">Veche</option>
-                <option value="folk">Folk</option>
-                <option value="rap">Rap</option>
-                <option value="trap">Trap</option>
-                <option value="electronic">Electronica</option>
-                <option value="manele">Manele</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Rock">Rock</option>
+                <option value="Veche">Veche</option>
+                <option value="Folk">Folk</option>
+                <option value="Rap">Rap</option>
+                <option value="Trap">Trap</option>
+                <option value="Electronica">Electronica</option>
+                <option value="Manele">Manele</option>
             </select>
             <button onclick="sendSong()">Trimite Melodie</button>
         </form>

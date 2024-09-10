@@ -22,5 +22,7 @@ if (isset($_COOKIE['login'])) {
         }
     }
 }
+
+$conn->close();
 require "html/login.html";
 ?>

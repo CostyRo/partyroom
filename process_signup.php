@@ -35,6 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         header("Location: account.php");
     }
+
     $conn->close();
+} else {
+    require "html/error.html";
 }
 ?>

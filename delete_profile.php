@@ -48,5 +48,9 @@ if (isset($_GET['profile'])) {
 
         header("Location: account.php");
     }
+
     $conn->close();
+} else {
+    require "html/error.html";
 }
+?>

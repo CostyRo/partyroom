@@ -36,5 +36,9 @@ if (isset($_GET['room']) && isset($_GET['profile'])) {
 
         header("Location: profile.php?profile=" . $_GET["profile"]);
     }
+
     $conn->close();
+} else {
+    require "html/error.html";
 }
+?>

@@ -9,19 +9,36 @@
 <body>
     <div>
         <h1>Room <?php echo $room;?></h1>
-
         <div id="dj">
             <h2>PlayList</h2>
+                <?php
+                foreach ($songs as $song) {
+                    if ($song['method'] === 'name') {
+                        echo '<div class="song">';
+                        echo '<h3>' . $song['name'] . '</h3>';
+                        echo '<h4>' . $song['type'] . '</h4>';
+                        echo '</div>';
+                    }else{
+                        echo '<div class="song">';
+                        echo '<h3><a target="_blank" href="' . $song['name'] . '">' . str_replace("https://", "", $song['name']) . '</a></h3>';
+                        echo '<h4>' . $song['type'] . '</h4>';
+                        echo '</div>';
+                    }
+                }
+                ?>
+            <div id="playlist">
+                
+            </div>
 
             <button onclick="gotoStatistics()">Statistici</button>
             <button onclick="window.location.href = `switch_room.php?room=<?php echo urlencode($_GET['room']); ?>&profile=<?php echo urlencode($_GET['profile']); ?>`">
                 <?php echo $status === 'Open' ? 'Inchide' : 'Deschide';?> Roomul
             </button>
-            <button onclick="resetRoom()">Reseteaza Roomul</button>
+            <button onclick="resetRoom()">Reseteaza Playlistul</button>
             <button onclick="openDeleteRoomModal()">Sterge Roomul</button>
             <button onclick="window.location.href = `profile.php?profile=<?php echo urlencode($_GET['profile']); ?>`">Înapoi</button>
 
-            <h5>Codul Room-ului este: <?php echo $code;?></h5>
+            <h4>Codul Room-ului este: <?php echo $code;?></h4>
         </div>
 
         <div id="deleteRoomModal" class="modal">

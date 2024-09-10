@@ -34,6 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: profile.php?profile=" . noAND($_POST["profileName"]));
         }
     }
+
     $conn->close();
+} else {
+    require "html/error.html";
 }
 ?>
