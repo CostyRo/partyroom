@@ -11,6 +11,7 @@
         <h1>Room <?php echo $room;?></h1>
         <div id="dj">
             <h2>PlayList</h2>
+                <div id="playlist">
                 <?php
                 foreach ($songs as $song) {
                     if ($song['method'] === 'name') {
@@ -26,15 +27,17 @@
                     }
                 }
                 ?>
-            <div id="playlist">
-                
-            </div>
+                </div>
 
-            <button onclick="gotoStatistics()">Statistici</button>
+            <button onclick="window.location.href = `statistics.php?room=<?php echo urlencode($_GET['room']); ?>&profile=<?php echo urlencode($_GET['profile']); ?>`">
+                Statistici
+            </button>
             <button onclick="window.location.href = `switch_room.php?room=<?php echo urlencode($_GET['room']); ?>&profile=<?php echo urlencode($_GET['profile']); ?>`">
                 <?php echo $status === 'Open' ? 'Inchide' : 'Deschide';?> Roomul
             </button>
-            <button onclick="resetRoom()">Reseteaza Playlistul</button>
+            <button onclick="window.location.href = `reset_playlist.php?room=<?php echo urlencode($_GET['room']); ?>&profile=<?php echo urlencode($_GET['profile']); ?>`">
+                Reseteaza Playlistul
+            </button>
             <button onclick="openDeleteRoomModal()">Sterge Roomul</button>
             <button onclick="window.location.href = `profile.php?profile=<?php echo urlencode($_GET['profile']); ?>`">Înapoi</button>
 

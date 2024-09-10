@@ -19,12 +19,18 @@ if (isset($_GET["room"]) && isset($_GET["profile"])) {
         die("Eroare: " . $conn->connect_error);
     }
 
-    $room = validateInput($conn,$_GET["room"]); 
+    $room = validateInput($conn,$_GET['room']);
+    $profile = validateInput($conn,$_GET['profile']);
 
-    $conn->query("DELETE FROM songs WHERE roomname = '$room'");
+    $counts  = $conn->query(
+        "SELECT type, COUNT(*) AS count FROM songs GROUP BY type;"
+    )->fetch_all(MYSQLI_ASSOC);
+    $labels = array_column($counts, 'type');
+    $data = array_column($counts, 'count');
+
     $conn->close();
 
-    header("Location: room.php?room=" . noAND($_GET['room']) . "&profile=" . noAND($_GET["profile"]));
+    include "html/statistics.html";
 } else {
     require "html/error.html";
 }

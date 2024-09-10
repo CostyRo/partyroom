@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistici Room <?php echo $room;?></title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style/statistics.css">
+</head>
+<body>
+    <header>
+        <h1>Statistici Room <?php echo $room;?></h1>
+    </header>
+    <main>
+        <canvas id="chart"></canvas>
+    </main>
+
+    <script>
+        var labels = <?php echo json_encode($labels); ?>;
+        var ctx = document.getElementById('chart').getContext('2d')
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels.map(label => label === null ? 'Necunoscut' : label),
+                datasets: [{
+                    data: <?php echo json_encode($data); ?>,
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C9CBCF', '#B4E1FF', '#FFCDD2']
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+
+</body>
+</html>
