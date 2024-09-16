@@ -23,7 +23,7 @@ if (isset($_GET["room"]) && isset($_GET["profile"])) {
     $profile = validateInput($conn,$_GET['profile']);
 
     $counts  = $conn->query(
-        "SELECT type, COUNT(*) AS count FROM songs GROUP BY type;"
+        "SELECT type, COUNT(*) AS count FROM songs WHERE roomname = '$room' GROUP BY type"
     )->fetch_all(MYSQLI_ASSOC);
     $labels = array_column($counts, 'type');
     $data = array_column($counts, 'count');
